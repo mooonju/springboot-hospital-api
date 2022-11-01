@@ -13,6 +13,15 @@ public class HospitalDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    public void deleteAll() {
+        this.jdbcTemplate.update("delete from nation_wide_hospitals");
+    }
+
+    public int getCount() {
+        String sql = "select count(id) from nation_wide_hospitals;";
+        return this.jdbcTemplate.queryForObject(sql, Integer.class);
+    }
+
     // List<Hospital> -- 11만건 데이터
     public void add(Hospital hospital) {
         String sql = "INSERT INTO `likelion-db`.`nation_wide_hospitals` \n" +
@@ -36,5 +45,7 @@ public class HospitalDao {
                 hospital.getHealthcareProviderCount(), hospital.getPatientRoomCount(), hospital.getTotalNumberOfBeds(),
                 hospital.getTotalAreaSize());
     }
+
+
 
 }
